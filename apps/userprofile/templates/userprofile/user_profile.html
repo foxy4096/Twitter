@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+
+{% block title %}
+{{ tuser.get_full_name|default:tuser.username }} (@{{tuser.username}})
+{% endblock title %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <section class="section">
+        <div class="columns">
+            <div class="column is-8">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-128x128">
+                                    <img src="{{ tuser.userprofile.avatar.url }}" alt="User avatar" class="profile-img">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <h1 class="title">{{ tuser.get_full_name|default:tuser.username }}</h1>
+                                <p class="subtitle">@{{ tuser.username }}</p>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            {% if tuser != user %}
+                            <a href="" class="button is-link is-outlined">Follow</a>
+                            {% else %}
+                            <a href="{% url 'userprofile:edit_profile' %}" class="button">Edit Myself</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                {% for tweet in tuser.tweet_set.all %}
+                {% include 'tweet/islands/tweet.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load bulma_tags %}
+
+
+{% block title %}
+    Edit Profile
+{% endblock title %}
+    
+
+{% block content %}
+    <div class="container">
+        <section class="section">
+            <h1 class="title">Edit Profile</h1>
+            <form action="." method="post">
+                {{uform|bulma}}
+                {{pform|bulma}}
+                {% csrf_token %}
+                <button type="submit" class="button is-large">Save</button>
+            </form>
+        </section>
+    </div>
+{% endblock content %}
+    

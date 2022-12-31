@@ -1,0 +1,29 @@
+{% load humanize %}
+
+<div class="card mb-3" id="tweet-{{ tweet.id }}">
+
+    <div class="card-content">
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <img src="{{ tweet.user.userprofile.avatar.url }}" alt="{{tweet.user.username}}" class="profile-img">
+                </figure>
+            </div>
+            <div class="media-content">
+                <strong>{{ tweet.user.get_full_name|default:tweet.user.get_username }}</strong>
+                <br>
+                <a href="{% url 'userprofile:user_details' tweet.user.username %}">@{{ tweet.user.get_username }}</a>
+                <small class="tag" title="{{ tweet.created_at }}">{{ tweet.created_at|naturaltime }}</small>
+            </div>
+        </div>
+        <div class="content">
+            {{tweet.body|safe}}
+            <br>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <a href="#tweet-{{ tweet.id }}" class="card-footer-item">View</a>
+        <a href="#" class="card-footer-item">Like</a>
+        <a href="#" class="card-footer-item">Comment</a>
+    </footer>
+</div>

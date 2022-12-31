@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load bulma_tags %}
+{% load humanize %}
+
+
+{% block title %}
+Home
+{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <section class="section">
+
+        <h1 class="title">Home</h1>
+        {% include 'tweet/islands/tweet_form.html' %}
+        {% for tweet in tweets %}
+            {% include 'tweet/islands/tweet.html' %}
+        {% endfor %}
+
+    </section>
+</div>
+{% endblock content %}

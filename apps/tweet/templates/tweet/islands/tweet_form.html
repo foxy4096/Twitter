@@ -1,0 +1,41 @@
+{% load bulma_tags %}
+
+<div class="box">
+    {% if user.is_authenticated %}
+    <div class="media pb-4">
+        <div class="media-left">
+            {% if user.userprofile.avatar %}
+            <figure class="image is-48x48">
+                <img src="{{ user.userprofile.avatar.url }}" alt="{{ user.username }}'s Profile Image" class="profile-img">
+            </figure>
+        </div>
+        <div class="media-content">
+            <strong>{{ user.get_full_name|default:user.get_username }}</strong>
+            <br>
+            <a href="{% url 'userprofile:user_details' user.username %}">@{{ user.get_username }}</a>
+        </div>
+        <div class="media-right">
+            <a href="{% url 'logout' %}" class="button is-danger is-small is-outlined">Logout</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+    <form action="{% url 'create_tweet' %}" method="post" class="form">
+        {% csrf_token %}
+        <div class="field">
+            <div class="control ">
+                <textarea 
+                name="body" 
+                cols="40" 
+                rows="10" 
+                maxlength="150" 
+                class="control textarea" 
+                required
+                placeholder="What's on your mind?"
+                id="id_body"></textarea>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="button is-info is-fullwidth is-large">Tweet</button>
+    </form>
+</div>
